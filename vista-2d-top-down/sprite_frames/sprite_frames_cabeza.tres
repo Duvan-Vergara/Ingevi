@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://steosf8vcg4e"]
+
+[ext_resource type="Texture2D" uid="uid://d1kysud1mkd1g" path="res://sprites/Cabeza.png" id="1_ixxty"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_supqh"]
+atlas = ExtResource("1_ixxty")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7y3p"]
+atlas = ExtResource("1_ixxty")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx871"]
+atlas = ExtResource("1_ixxty")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynxq0"]
+atlas = ExtResource("1_ixxty")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_supqh")
+}],
+"loop": 1,
+"name": &"abajo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7y3p")
+}],
+"loop": 1,
+"name": &"arriba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx871")
+}],
+"loop": 1,
+"name": &"derecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynxq0")
+}],
+"loop": 1,
+"name": &"izquierda",
+"speed": 5.0
+}]

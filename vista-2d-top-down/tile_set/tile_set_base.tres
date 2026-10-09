@@ -1,0 +1,34 @@
+[gd_resource type="TileSet" format=3 uid="uid://bbvs3p534ggj"]
+
+[ext_resource type="Texture2D" uid="uid://bdk3lbvneppt1" path="res://sprites/tileset_terreno_base.png" id="1_65038"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhn0o"]
+texture = ExtResource("1_65038")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[resource]
+terrain_set_0/mode = 0
+sources/0 = SubResource("TileSetAtlasSource_dhn0o")

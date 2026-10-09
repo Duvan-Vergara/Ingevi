@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bcufageerxx3i"]
+
+[ext_resource type="Script" uid="uid://cfhke448n0drq" path="res://escenas/personaje_principal.gd" id="1_trxxe"]
+[ext_resource type="SpriteFrames" uid="uid://b4o3l8b4etgsv" path="res://sprite_frames/sprite_frames_cuerpo_idle.tres" id="1_xsu42"]
+[ext_resource type="SpriteFrames" uid="uid://steosf8vcg4e" path="res://sprite_frames/sprite_frames_cabeza.tres" id="2_j0kpk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1ko3"]
+size = Vector2(18, 16)
+
+[node name="personaje_principal" type="CharacterBody2D" unique_id=1359654191 node_paths=PackedStringArray("mov_cuerpo", "mov_cabeza")]
+script = ExtResource("1_trxxe")
+mov_cuerpo = NodePath("Cuerpo")
+mov_cabeza = NodePath("Cabeza")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696526366]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_o1ko3")
+
+[node name="Cuerpo" type="AnimatedSprite2D" parent="." unique_id=170540592]
+sprite_frames = ExtResource("1_xsu42")
+animation = &"idle_abajo"
+
+[node name="Cabeza" type="AnimatedSprite2D" parent="." unique_id=1568776825]
+position = Vector2(0, -13)
+sprite_frames = ExtResource("2_j0kpk")
+animation = &"izquierda"
