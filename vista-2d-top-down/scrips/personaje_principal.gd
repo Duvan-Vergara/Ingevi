@@ -6,6 +6,9 @@ extends CharacterBody2D
 var velocidad: float = 300.0
 var direccion: String = "abajo"
 
+func _ready() -> void:
+	add_to_group("Jugador")
+
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
@@ -47,3 +50,8 @@ func actualizar_mov(estado:String):
 	mov_cuerpo.play(estado + "_" + direccion)
 	mov_cabeza.play(direccion)
 	
+func recibir_impacto(positivo:bool, impacto:float) -> void:
+	if positivo:
+		print("Impacto positivo: ", impacto)
+	else:
+		print("Impacto negativo: ", impacto)

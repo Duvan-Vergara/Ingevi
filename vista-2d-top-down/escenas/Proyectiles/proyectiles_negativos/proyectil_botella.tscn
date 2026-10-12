@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cbaa2jly3j2av"]
+
+[ext_resource type="PackedScene" uid="uid://boo7q7i8vtrjw" path="res://escenas/Proyectiles/proyectil_base/proyectil_base.tscn" id="1_evu1l"]
+[ext_resource type="Texture2D" uid="uid://ddo34y1ljpj2i" path="res://sprites/Proyectiles.png" id="2_spywy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evu1l"]
+resource_local_to_scene = true
+size = Vector2(6, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spywy"]
+resource_local_to_scene = true
+atlas = ExtResource("2_spywy")
+region = Rect2(0, 0, 16, 16)
+
+[node name="ProyectilBotella" unique_id=806660919 instance=ExtResource("1_evu1l")]
+collision_layer = 8
+positivo = false
+impacto = 10.0
+
+[node name="ProyectilColision" parent="." index="0" unique_id=1001241481]
+shape = SubResource("RectangleShape2D_evu1l")
+
+[node name="ProyectilSprite" parent="." index="1" unique_id=1335794113]
+position = Vector2(1, -1)
+texture = SubResource("AtlasTexture_spywy")

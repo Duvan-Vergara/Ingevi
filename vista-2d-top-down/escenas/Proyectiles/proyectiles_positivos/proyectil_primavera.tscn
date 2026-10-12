@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://oxelmi3l1tmj"]
+
+[ext_resource type="PackedScene" uid="uid://boo7q7i8vtrjw" path="res://escenas/Proyectiles/proyectil_base/proyectil_base.tscn" id="1_66ifb"]
+[ext_resource type="Texture2D" uid="uid://ddo34y1ljpj2i" path="res://sprites/Proyectiles.png" id="2_l6b3p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6b3p"]
+resource_local_to_scene = true
+size = Vector2(13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaj4h"]
+resource_local_to_scene = true
+atlas = ExtResource("2_l6b3p")
+region = Rect2(64, 16, 16, 16)
+
+[node name="ProyectilPrimavera" unique_id=806660919 instance=ExtResource("1_66ifb")]
+collision_layer = 16
+collision_mask = 3
+impacto = 10.0
+rotar = false
+
+[node name="ProyectilColision" parent="." index="0" unique_id=1001241481]
+shape = SubResource("RectangleShape2D_l6b3p")
+
+[node name="ProyectilSprite" parent="." index="1" unique_id=1335794113]
+scale = Vector2(0.9375, 0.9375)
+texture = SubResource("AtlasTexture_iaj4h")
