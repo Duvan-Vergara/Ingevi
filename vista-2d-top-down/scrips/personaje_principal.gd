@@ -52,6 +52,6 @@ func actualizar_mov(estado:String):
 	
 func recibir_impacto(positivo:bool, impacto:float) -> void:
 	if positivo:
-		print("Impacto positivo: ", impacto)
+		print("Impacto positivo de valor: ", impacto)
 	else:
 		print("Impacto negativo: ", impacto)
