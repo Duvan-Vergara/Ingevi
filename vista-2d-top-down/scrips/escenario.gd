@@ -6,6 +6,7 @@ extends Node2D
 
 func _ready() -> void:
 	timer.timeout.connect(_spawneo)
+	
 
 func _spawneo() ->void:
 	if proyectiles.is_empty():

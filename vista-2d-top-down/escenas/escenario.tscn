@@ -19,8 +19,9 @@ tile_set = ExtResource("1_1uc0k")
 tile_map_data = PackedByteArray("AAAvAA8AAAADAAEAAAANAAYAAAAFAAEAAAAQABcAAAADAAAAAAASAAgAAAADAAAAAAAVABcAAAADAAAAAAAYABUAAAAFAAAAAAAYAAwAAAAEAAAAAAAYAAcAAAADAAAAAAAZAAwAAAAEAAAAAAAaAAwAAAAEAAAAAAAjAAwAAAAFAAAAAAAlAAoAAAADAAAAAAAmABMAAAADAAAAAAApAAYAAAADAAAAAAArABUAAAADAAAAAAAOABAAAAAFAAAAAAAkAAYAAAAFAAAAAAATABYAAAADAAAAAAAUAA8AAAAFAAEAAAA=")
 tile_set = ExtResource("1_1uc0k")
 
-[node name="personaje_principal" parent="." unique_id=1359654191 instance=ExtResource("2_rldi1")]
+[node name="personaje_principal" parent="." unique_id=1359654191 node_paths=PackedStringArray("punto_cinematica") instance=ExtResource("2_rldi1")]
 position = Vector2(465, 49)
+punto_cinematica = NodePath("../objetivo_cinematica")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1058528680]
 position = Vector2(479.52, 231.755)
@@ -28,3 +29,6 @@ zoom = Vector2(1.99, 1.91)
 
 [node name="Timer" type="Timer" parent="." unique_id=1962437998]
 autostart = true
+
+[node name="objetivo_cinematica" type="Marker2D" parent="." unique_id=1924774796]
+position = Vector2(466, 201)

@@ -50,6 +50,7 @@ derecha={
 2d_physics/layer_3="Enemigo"
 2d_physics/layer_4="Proyectil_Malo"
 2d_physics/layer_5="Proyectil_Bueno"
+2d_physics/layer_6="Mouse"
 
 [physics]
 

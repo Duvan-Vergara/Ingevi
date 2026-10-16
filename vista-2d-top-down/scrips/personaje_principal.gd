@@ -2,10 +2,13 @@ extends CharacterBody2D
 
 @export var mov_cuerpo: AnimatedSprite2D
 @export var mov_cabeza: AnimatedSprite2D
+@export var punto_cinematica: Marker2D
+@export var clicks: Area2D
 
 var velocidad: float = 300.0
 var direccion: String = "abajo"
 var punto_objetivo: Vector2
+var contador_clicks:int = 0
 
 #Para manipulacion luego
 enum controlador_jugador{Manual, Cinematica, AI}
@@ -14,8 +17,9 @@ var control_actual_jugador: controlador_jugador = controlador_jugador.Manual
 func _ready() -> void:
 	#Se agrega al grupo "Jugador" para buscarlo de mejor forma
 	add_to_group("Jugador")
-	var tamaño_pantalla:= get_viewport_rect().size
-	mover_hacia(Vector2(tamaño_pantalla.x / 2.0, tamaño_pantalla.y / 2.0))
+	#Se conecta para que se detecten los clicks, que es un input even (al tener en el area2D lo de clickable activado)
+	clicks.input_event.connect(control_clicks)
+	mover_hacia(punto_cinematica.global_position)
 
 #cada frame del juego
 func _physics_process(_delta: float) -> void:
@@ -77,6 +81,24 @@ func movimiento_cinematica():
 	#si no llega aun
 	var meta_posicion = (punto_objetivo - global_position).normalized()
 	mover_personaje(meta_posicion, velocidad/2)
+
+
+func control_clicks(_viewport: Node,event: InputEvent, _shape_idx: int):
+	
+	#Se verifica si se esta en una cinematica:
+	if control_actual_jugador == controlador_jugador.Cinematica:
+		return
+	
+	#Comprobamos que sea un tipo de accion (en este caso, del raton, ya sea click o soltar el click)
+	if event is InputEventMouseButton:
+		if event.pressed && event.button_index == MOUSE_BUTTON_LEFT:
+			print("Fue el boton izquierdo")
+			conteo_clicks()
+
+func conteo_clicks():
+	contador_clicks +=1
+	print("El personaje fue pulsado: ", contador_clicks, " Veces")
+
 
 func control_manual():
 	#Se define el vector de direcciones para movimiento manual
