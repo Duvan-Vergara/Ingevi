@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="vista-2d-top-down"
+config/name="Emptiness Drift"
 run/main_scene="uid://bbgu3grsfw0be"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"

@@ -18,7 +18,7 @@ mov_cuerpo = NodePath("Cuerpo")
 mov_cabeza = NodePath("Cabeza")
 clicks = NodePath("AreaClicks")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696526366]
+[node name="AreaPersonaje" type="CollisionShape2D" parent="." unique_id=696526366]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_o1ko3")
 

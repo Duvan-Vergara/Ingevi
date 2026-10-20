@@ -130,10 +130,15 @@ func movimiento_mouse(delta:float):
 		control_actual_jugador = controlador_jugador.Manual
 
 func movimiento_borracho(delta:float) -> void:
+	#Delta Time: Se usa para poder hacer que la interpolacion lineal que
+	# se usa para disminuir la fuerza de clicks acumulada, baje de igual forma 
+	# independiente de los Hz de la pantalla, o los FPS.
 	fuerza_clicks = fuerza_clicks.lerp(Vector2.ZERO, 4.0*delta)
+	
 	#Se conprueba si el cmaino del borracho esta activo
 	if borracho:
-		#restar al tiempo de refresco
+		#Delta Time: Se usa para que el timepo que definirmos de Cooldown disminuya
+		# en la misma proporsion sin inportar FPS/Hz en que se haga, y se ocupe timepo real
 		cooldown_cambio -= delta
 		if cooldown_cambio <= 0.0:
 			cooldown_cambio = 1.0
