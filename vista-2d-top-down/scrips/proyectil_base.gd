@@ -12,6 +12,7 @@ extends Area2D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	get_tree().create_timer(5.0).timeout.connect(func(): queue_free())
 
 func _physics_process(delta: float) -> void:
 	#movimiento lineal
@@ -20,12 +21,9 @@ func _physics_process(delta: float) -> void:
 	#Rotacion
 	if rotar:
 		rotation += velocidad_rotar * delta
-		
-
 
 #cuando algo entra en el area del proeyctil
 func _on_body_entered(body: Node2D) -> void:
-	
 	#como detecta solo al jugador, es su funcion
 	if(body.has_method("recibir_impacto")):
 		body.recibir_impacto(positivo, impacto)
