@@ -10,13 +10,14 @@ size = Vector2(18, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_tytbr"]
 radius = 30.265491
 
-[node name="PersonajePrincipal" type="CharacterBody2D" unique_id=1359654191 node_paths=PackedStringArray("mov_cuerpo", "mov_cabeza", "clicks")]
+[node name="PersonajePrincipal" type="CharacterBody2D" unique_id=1359654191 node_paths=PackedStringArray("mov_cuerpo", "mov_cabeza", "clicks", "colisiones_propias")]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_trxxe")
 mov_cuerpo = NodePath("Cuerpo")
 mov_cabeza = NodePath("Cabeza")
 clicks = NodePath("AreaClicks")
+colisiones_propias = NodePath("AreaPersonaje")
 
 [node name="AreaPersonaje" type="CollisionShape2D" parent="." unique_id=696526366]
 position = Vector2(0, 7)

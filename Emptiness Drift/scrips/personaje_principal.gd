@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var mov_cabeza: AnimatedSprite2D
 @export var punto_cinematica: Marker2D
 @export var clicks: Area2D
+@export var colisiones_propias:CollisionShape2D
 
 #========================================================
 # Variables locales
@@ -36,7 +37,7 @@ var clicks_pasivos:bool = false
 
 #Para manipulacion luego
 enum controlador_jugador{Manual, Mouse, Cinematica, AI}
-var control_actual_jugador: controlador_jugador = controlador_jugador.Manual
+var control_actual_jugador: controlador_jugador
 
 #========================================================
 # Inicio de codigo
@@ -45,8 +46,7 @@ var control_actual_jugador: controlador_jugador = controlador_jugador.Manual
 func _ready() -> void:
 	#Se agrega al grupo "Jugador" para buscarlo de mejor forma
 	add_to_group("Jugador")
-	#Se conecta para que se detecten los clicks, que es un input even (al tener en el area2D lo de clickable activado)
-	clicks.input_event.connect(control_clicks)
+	#Se inicia con una cinematica
 	mover_hacia(punto_cinematica.global_position)
 
 #cada frame del juego
@@ -72,6 +72,14 @@ func _physics_process(delta: float) -> void:
 func mover_hacia(objetivo:Vector2):
 	punto_objetivo = objetivo
 	control_actual_jugador = controlador_jugador.Cinematica
+	#Se desactivan las colisiones
+	colisiones_propias.disabled = true
+	#Se pone como una layer vacia, osea otra que no importe
+	collision_layer = 7
+	
+	if  clicks.input_event.is_connected(control_clicks):
+		#Se desconecta de su unica conexion
+		clicks.input_event.disconnect(control_clicks)
 
 func mover_personaje(vector_direccion:Vector2, velocidad_usada:float):
 	# Por si esta quieto
@@ -114,6 +122,15 @@ func movimiento_cinematica():
 		mover_personaje(Vector2.ZERO, 0)
 		control_actual_jugador = controlador_jugador.Manual
 		print("Termino correcto de cinematica")
+		#Ahora al termino de la cinematica se conectan y agregan al grupo
+
+		#Se conecta para que se detecten los clicks, que es un input even (al tener en el area2D lo de clickable activado)
+		clicks.input_event.connect(control_clicks)
+
+		#Se activan las colisiones
+		colisiones_propias.disabled = false
+		#Layer de Jugador
+		collision_layer = 2
 		return
 		
 	#si no llega aun

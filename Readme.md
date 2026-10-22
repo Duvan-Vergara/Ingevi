@@ -1,14 +1,14 @@
-### Equipo: Void Dust
+# Equipo: Void Dust
 
-## Proyecto: Emptiness Drift
+# Proyecto: Emptiness Drift
 
-# Caracteristicas:
-```
+## Caracteristicas:
+
 - Godot 4.7
 - PC
-```
 
-# Instrucciones:
+
+## Instrucciones:
 
 - Clonar el repositorio
 - Abrir godot
