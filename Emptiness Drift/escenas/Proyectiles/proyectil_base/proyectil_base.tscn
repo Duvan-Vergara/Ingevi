@@ -12,15 +12,18 @@ resource_local_to_scene = true
 atlas = ExtResource("2_ak1cf")
 region = Rect2(0.02747345, -0.8049526, 128.38596, 129.92812)
 
-[node name="ProyectilBase" type="Area2D" unique_id=806660919 node_paths=PackedStringArray("proyectil_sprite", "proyectil_colision")]
+[node name="ProyectilBase" type="Area2D" unique_id=806660919 node_paths=PackedStringArray("proyectil_sprite", "proyectil_colision", "audio")]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_a15bt")
 proyectil_sprite = NodePath("ProyectilSprite")
 proyectil_colision = NodePath("ProyectilColision")
+audio = NodePath("Sonido")
 
 [node name="ProyectilColision" type="CollisionShape2D" parent="." unique_id=1001241481]
 shape = SubResource("RectangleShape2D_o1ko3")
 
 [node name="ProyectilSprite" type="Sprite2D" parent="." unique_id=1335794113]
 texture = SubResource("AtlasTexture_o1ko3")
+
+[node name="Sonido" type="AudioStreamPlayer2D" parent="." unique_id=299699893]

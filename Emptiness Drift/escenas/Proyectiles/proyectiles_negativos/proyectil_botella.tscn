@@ -2,12 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://boo7q7i8vtrjw" path="res://escenas/Proyectiles/proyectil_base/proyectil_base.tscn" id="1_evu1l"]
 [ext_resource type="Texture2D" uid="uid://ddo34y1ljpj2i" path="res://sprites/Proyectiles.png" id="2_spywy"]
+[ext_resource type="AudioStream" uid="uid://c0q1lr0ecbu7o" path="res://sonidos/bad_prueba.wav" id="3_spywy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evu1l"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5fl7"]
 resource_local_to_scene = true
 size = Vector2(6, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_spywy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_po2fu"]
 resource_local_to_scene = true
 atlas = ExtResource("2_spywy")
 region = Rect2(0, 0, 16, 16)
@@ -18,8 +19,11 @@ positivo = false
 impacto = 10.0
 
 [node name="ProyectilColision" parent="." index="0" unique_id=1001241481]
-shape = SubResource("RectangleShape2D_evu1l")
+shape = SubResource("RectangleShape2D_s5fl7")
 
 [node name="ProyectilSprite" parent="." index="1" unique_id=1335794113]
 position = Vector2(1, -1)
-texture = SubResource("AtlasTexture_spywy")
+texture = SubResource("AtlasTexture_po2fu")
+
+[node name="Sonido" parent="." index="2" unique_id=299699893]
+stream = ExtResource("3_spywy")

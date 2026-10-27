@@ -9,6 +9,7 @@ extends Area2D
 @export var rotar:bool = true
 @export var velocidad_rotar:float = 10.0
 @export var direccion:Vector2 = Vector2.ZERO
+@export var audio:AudioStreamPlayer2D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -26,5 +27,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	#como detecta solo al jugador, es su funcion
 	if(body.has_method("recibir_impacto")):
+		audio.reparent(get_parent())
+		audio.play()
 		body.recibir_impacto(positivo, impacto, proyectil_sprite.texture)
 	queue_free()
