@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 #========================================================
 # Variables exportadas
@@ -24,6 +24,8 @@ var cooldown_cambio: float = 1.0
 var experiencia:float = 0.0
 var xp_necesaria:float= 10.0
 var velocidad: float = 300.0
+var fuerza_click: float = 400.0
+
 
 var contador_clicks:int = 0
 
@@ -44,10 +46,15 @@ var control_actual_jugador: controlador_jugador
 #========================================================
 
 func _ready() -> void:
+	#Se quita el impacto en la gravedad para que no caiga
+	gravity_scale = 0.0
+	#Friccion del suelo con el personaje
+	linear_damp = 3.0
 	#Se agrega al grupo "Jugador" para buscarlo de mejor forma
 	add_to_group("Jugador")
 	#Se inicia con una cinematica
 	mover_hacia(punto_cinematica.global_position)
+
 
 #cada frame del juego
 func _physics_process(delta: float) -> void:
@@ -61,12 +68,36 @@ func _physics_process(delta: float) -> void:
 		controlador_jugador.Manual:
 			movimiento_borracho(delta)
 		controlador_jugador.Mouse:
-			movimiento_mouse(delta)
-	move_and_slide()
+			# Si la velocidad del cuerpo físico ya es casi cero, vuelve a control manual
+			if linear_velocity.length() <= 5.0:
+				control_actual_jugador = controlador_jugador.Manual
+	calcular_direccion_sprites(linear_velocity)
+	actualizar_mov("idle")
 
 #========================================================
 # Funciones de movimiento
 #========================================================
+
+func control_clicks(_viewport: Node,event: InputEvent, _shape_idx: int):
+	#Se verifica si se esta en una cinematica:
+	if control_actual_jugador == controlador_jugador.Cinematica:
+		return
+	if event is InputEventMouseButton && event.is_action_pressed("empujar"):
+		pasivo((global_position - get_global_mouse_position()).normalized())
+
+#Funcion cambia de control_clicks a esta
+#Detecta todas las acciones como algo central en RigidBody2D
+func _unhandled_input(event: InputEvent) -> void:
+	#Se verifica si se esta en una cinematica:
+	if control_actual_jugador == controlador_jugador.Cinematica:
+		return
+
+	#Se veriia que se haya puesto la de "empujar"
+	if event.is_action_pressed("empujar") && !(event is InputEventMouseButton):
+		var direccion_click = Input.get_vector("izquierda", "derecha", "arriba", "abajo").normalized()
+		if direccion_click == Vector2.ZERO:
+			direccion_click = Vector2.UP
+		pasivo(direccion_click)
 
 # Para cualquier situacion que requiera moverlo hacia un punto objetivo
 func mover_hacia(objetivo:Vector2):
@@ -81,19 +112,55 @@ func mover_hacia(objetivo:Vector2):
 		#Se desconecta de su unica conexion
 		clicks.input_event.disconnect(control_clicks)
 
-func mover_personaje(vector_direccion:Vector2, velocidad_usada:float):
-	# Por si esta quieto
-	if vector_direccion == Vector2.ZERO:
-		velocity = Vector2.ZERO
-		actualizar_mov("idle")
+func movimiento_cinematica():
+	var diferencia = global_position.distance_to(punto_objetivo)
+	#comprobar si se llego
+	if  diferencia < 5.0:
+		#Volver a control manual
+		linear_velocity = Vector2.ZERO
+		control_actual_jugador = controlador_jugador.Manual
+		print("Termino correcto de cinematica: ", global_position)
+		#Ahora al termino de la cinematica se conectan y agregan al grupo
+
+		#Se conecta para que se detecten los clicks, que es un input even (al tener en el area2D lo de clickable activado)
+		clicks.input_event.connect(control_clicks)
+
+		#Se activan las colisiones
+		colisiones_propias.disabled = false
+		#Layer de Jugador
+		collision_layer = 2
 		return
+		
+	#si no llega aun
+	var meta_posicion = (punto_objetivo - global_position).normalized()
+	linear_velocity = meta_posicion * (velocidad/2)
 
-	velocity = vector_direccion.normalized() * velocidad_usada
+func movimiento_borracho(delta:float) -> void:
+	#Se conprueba si el camino del borracho esta activo
+	if borracho:
+		#Delta Time: Se usa para que el timepo que definirmos de Cooldown disminuya
+		# en la misma proporsion sin inportar FPS/Hz en que se haga, y se ocupe timepo real
+		cooldown_cambio -= delta
+		if cooldown_cambio <= 0.0:
+			cooldown_cambio = 1.0
+			#Vector de direccion al azar
+			direccion_borracho = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
+		#Se usa force para que no se haga en cada frame y salga con velocidad infinita
+		apply_central_force(direccion_borracho * velocidad)
 
-	calcular_direccion_sprites(velocity)
+#========================================================
+# Funciones Complementarias
+#========================================================
 
-	#futuro walk
-	actualizar_mov("idle")
+func pasivo(direccion_click: Vector2) -> void:
+	#Si es que los clicks pasivos estan
+	if clicks_pasivos:
+		apply_central_impulse(direccion_click * fuerza_click)
+	else:
+		#si no estan activos los clicks pasivos, se cambia el control a solo mouse
+		control_actual_jugador = controlador_jugador.Mouse
+		apply_central_impulse(direccion_click * fuerza_click)
+	conteo_clicks()
 
 func calcular_direccion_sprites(vector_velocidad:Vector2):
 	#comprobar mov horizontal
@@ -114,92 +181,12 @@ func calcular_direccion_sprites(vector_velocidad:Vector2):
 		else:
 			direccion = "arriba"
 
-func movimiento_cinematica():
-	var diferencia = global_position.distance_to(punto_objetivo)
-	#comprobar si se llego
-	if  diferencia < 5.0:
-		#Volver a control manual
-		mover_personaje(Vector2.ZERO, 0)
-		control_actual_jugador = controlador_jugador.Manual
-		print("Termino correcto de cinematica")
-		#Ahora al termino de la cinematica se conectan y agregan al grupo
-
-		#Se conecta para que se detecten los clicks, que es un input even (al tener en el area2D lo de clickable activado)
-		clicks.input_event.connect(control_clicks)
-
-		#Se activan las colisiones
-		colisiones_propias.disabled = false
-		#Layer de Jugador
-		collision_layer = 2
-		return
-		
-	#si no llega aun
-	var meta_posicion = (punto_objetivo - global_position).normalized()
-	mover_personaje(meta_posicion, velocidad/2)
-
-func movimiento_mouse(delta:float):
-	#Se disminuye la velocidad poco a poco
-	velocity = velocity.lerp(Vector2.ZERO, 2*delta)
-
-	#por si acaso verificamos si la magnitud es cercana a 0, para no hacerla infinita
-	if velocity.length() <= 1:
-		velocity = Vector2.ZERO
-		control_actual_jugador = controlador_jugador.Manual
-
-func movimiento_borracho(delta:float) -> void:
-	#Delta Time: Se usa para poder hacer que la interpolacion lineal que
-	# se usa para disminuir la fuerza de clicks acumulada, baje de igual forma 
-	# independiente de los Hz de la pantalla, o los FPS.
-	fuerza_clicks = fuerza_clicks.lerp(Vector2.ZERO, 4.0*delta)
-	
-	#Se conprueba si el cmaino del borracho esta activo
-	if borracho:
-		#Delta Time: Se usa para que el timepo que definirmos de Cooldown disminuya
-		# en la misma proporsion sin inportar FPS/Hz en que se haga, y se ocupe timepo real
-		cooldown_cambio -= delta
-		if cooldown_cambio <= 0.0:
-			cooldown_cambio = 1.0
-			#Vector de direccion al azar
-			direccion_borracho = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
-		var vector_final = direccion_borracho * (velocidad/2) + fuerza_clicks
-		mover_personaje(vector_final, vector_final.length())
-
-#========================================================
-# Funciones de Control
-#========================================================
-
-func control_clicks(_viewport: Node,event: InputEvent, _shape_idx: int):
-	#Se verifica si se esta en una cinematica:
-	if control_actual_jugador == controlador_jugador.Cinematica:
-		return
-
-	#Comprobamos que sea un tipo de accion (en este caso, del raton, ya sea click o soltar el click)
-	if event is InputEventMouseButton:
-		if event.pressed && event.button_index == MOUSE_BUTTON_LEFT:
-			if clicks_pasivos:
-				var direccion_click := (global_position - get_global_mouse_position()).normalized()
-				fuerza_clicks += direccion_click * velocidad 
-			else:
-				#si no estan activos los clicks pasivos, se cambia el control a solo mouse
-				control_actual_jugador = controlador_jugador.Mouse
-				#Se hace el calculo del la direccion para el movimiento al hacer click
-				mover_personaje((global_position - get_global_mouse_position()).normalized(), velocidad/2)
-			print("Fue el boton izquierdo")
-			conteo_clicks()
-
-func control_manual():
-	#Se define el vector de direcciones para movimiento manual
-	var input = Input.get_vector("izquierda", "derecha", "arriba", "abajo")
-	mover_personaje(input, velocidad)
-
-#========================================================
-# Funciones Complementarias
-#========================================================
 func conteo_clicks():
 	contador_clicks +=1
 	experiencia += 1.0
 	print("El personaje fue pulsado: ", contador_clicks, " Veces")
 	print("La experiencia actual es: ", experiencia)
+	print("Personaje quedo en posicion: ", global_position)
 
 func actualizar_mov(estado:String):
 	mov_cuerpo.play(estado + "_" + direccion)
