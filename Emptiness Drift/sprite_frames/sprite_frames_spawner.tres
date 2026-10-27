@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://boaumbfallh6e"]
+
+[ext_resource type="Texture2D" uid="uid://bwu630ndy0vcw" path="res://sprites/spawner.png" id="1_yrqqi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrqqi"]
+atlas = ExtResource("1_yrqqi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ccr5"]
+atlas = ExtResource("1_yrqqi")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrqqi")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ccr5")
+}],
+"loop": 0,
+"name": &"lanzar",
+"speed": 5.0
+}]

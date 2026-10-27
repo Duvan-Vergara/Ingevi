@@ -12,6 +12,5 @@ func _spawneo():
 	
 	var spawn = spawner.instantiate() as Spawner
 	add_child(spawn)
-	spawn.sprite.scale = Vector2(0.1, 0.1)
 	spawn.global_position = posicion_azar
 	spawn.spawneo_base()

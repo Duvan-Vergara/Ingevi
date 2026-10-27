@@ -3,17 +3,18 @@
 [ext_resource type="Script" uid="uid://bga3wcaa4p15i" path="res://scrips/spawner.gd" id="1_prhet"]
 [ext_resource type="PackedScene" uid="uid://cbaa2jly3j2av" path="res://escenas/Proyectiles/proyectiles_negativos/proyectil_botella.tscn" id="2_0cuwx"]
 [ext_resource type="PackedScene" uid="uid://oxelmi3l1tmj" path="res://escenas/Proyectiles/proyectiles_positivos/proyectil_primavera.tscn" id="3_jg61a"]
-[ext_resource type="Texture2D" uid="uid://3jvo0tqqsp4t" path="res://icon.svg" id="4_jg61a"]
+[ext_resource type="SpriteFrames" uid="uid://boaumbfallh6e" path="res://sprite_frames/sprite_frames_spawner.tres" id="4_jg61a"]
 
 [node name="Spawner" type="Node2D" unique_id=89573297 node_paths=PackedStringArray("sprite", "timer")]
 script = ExtResource("1_prhet")
 proyectiles = Array[PackedScene]([ExtResource("2_0cuwx"), ExtResource("3_jg61a")])
-sprite = NodePath("Sprite2D")
-timer = NodePath("Timer")
+sprite = NodePath("Diseño")
+timer = NodePath("Cooldown")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1340664754]
-texture = ExtResource("4_jg61a")
+[node name="Diseño" type="AnimatedSprite2D" parent="." unique_id=194704140]
+sprite_frames = ExtResource("4_jg61a")
+animation = &"idle"
 
-[node name="Timer" type="Timer" parent="." unique_id=686521435]
+[node name="Cooldown" type="Timer" parent="." unique_id=686521435]
 wait_time = 0.3
 autostart = true
