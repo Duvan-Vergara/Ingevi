@@ -10,7 +10,7 @@ size = Vector2(18, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_tytbr"]
 radius = 30.265491
 
-[node name="PersonajePrincipal" type="RigidBody2D" unique_id=397584173 node_paths=PackedStringArray("mov_cuerpo", "mov_cabeza", "clicks", "colisiones_propias")]
+[node name="PersonajePrincipal" type="RigidBody2D" unique_id=397584173 node_paths=PackedStringArray("mov_cuerpo", "mov_cabeza", "clicks", "colisiones_propias", "aura")]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_trxxe")
@@ -18,6 +18,7 @@ mov_cuerpo = NodePath("Cuerpo")
 mov_cabeza = NodePath("Cabeza")
 clicks = NodePath("AreaClicks")
 colisiones_propias = NodePath("AreaPersonaje")
+aura = NodePath("Aura")
 
 [node name="AreaPersonaje" type="CollisionShape2D" parent="." unique_id=696526366]
 position = Vector2(0, 7)
@@ -36,3 +37,17 @@ animation = &"izquierda"
 
 [node name="AreaEfectiva" type="CollisionShape2D" parent="AreaClicks" unique_id=1663274127]
 shape = SubResource("CircleShape2D_tytbr")
+
+[node name="Aura" type="CPUParticles2D" parent="." unique_id=244554386]
+emitting = false
+amount = 15
+lifetime = 1.5
+one_shot = true
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector2(0, 0)
+orbit_velocity_min = 0.5
+orbit_velocity_max = 1.0
+scale_amount_min = 0.5
+scale_amount_max = 0.7

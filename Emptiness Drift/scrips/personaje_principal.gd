@@ -9,6 +9,7 @@ extends RigidBody2D
 @export var punto_cinematica: Marker2D
 @export var clicks: Area2D
 @export var colisiones_propias:CollisionShape2D
+@export var aura:CPUParticles2D
 
 #========================================================
 # Variables locales
@@ -78,6 +79,7 @@ func _physics_process(delta: float) -> void:
 # Funciones de movimiento
 #========================================================
 
+#Para control de area de clicks
 func control_clicks(_viewport: Node,event: InputEvent, _shape_idx: int):
 	#Se verifica si se esta en una cinematica:
 	if control_actual_jugador == controlador_jugador.Cinematica:
@@ -85,7 +87,6 @@ func control_clicks(_viewport: Node,event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton && event.is_action_pressed("empujar"):
 		pasivo((global_position - get_global_mouse_position()).normalized())
 
-#Funcion cambia de control_clicks a esta
 #Detecta todas las acciones como algo central en RigidBody2D
 func _unhandled_input(event: InputEvent) -> void:
 	#Se verifica si se esta en una cinematica:
@@ -112,6 +113,7 @@ func mover_hacia(objetivo:Vector2):
 		#Se desconecta de su unica conexion
 		clicks.input_event.disconnect(control_clicks)
 
+#Movimiento en cinematicas
 func movimiento_cinematica():
 	var diferencia = global_position.distance_to(punto_objetivo)
 	#comprobar si se llego
@@ -192,8 +194,12 @@ func actualizar_mov(estado:String):
 	mov_cuerpo.play(estado + "_" + direccion)
 	mov_cabeza.play(direccion)
 
-func recibir_impacto(positivo:bool, impacto:float) -> void:
+func recibir_impacto(positivo:bool, impacto:float, textura:Texture2D) -> void:
 	if positivo:
 		print("Impacto positivo de valor: ", impacto)
 	else:
 		print("Impacto negativo: ", impacto)
+	
+	if textura:
+		aura.texture = textura
+		aura.restart()

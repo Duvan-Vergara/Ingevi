@@ -26,5 +26,5 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	#como detecta solo al jugador, es su funcion
 	if(body.has_method("recibir_impacto")):
-		body.recibir_impacto(positivo, impacto)
+		body.recibir_impacto(positivo, impacto, proyectil_sprite.texture)
 	queue_free()
