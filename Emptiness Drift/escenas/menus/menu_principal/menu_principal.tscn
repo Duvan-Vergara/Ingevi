@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cmqwv372vltnx"]
+
+[ext_resource type="Script" uid="uid://damjaqald37pb" path="res://scrips/menus/menu_principal/botones/jugar.gd" id="1_a377p"]
+[ext_resource type="PackedScene" uid="uid://bj12744vb7eea" path="res://escenas/mapa/principal/gestion_mapas.tscn" id="2_uxsmf"]
+[ext_resource type="Script" uid="uid://ctxwxfsc5r4ii" path="res://escenas/menus/menu_principal/opciones.gd" id="3_jxos8"]
+[ext_resource type="Script" uid="uid://k1qdcjqkovrh" path="res://escenas/menus/menu_principal/salir.gd" id="4_krnv7"]
+
+[node name="MenuPrincipal" type="Control" unique_id=1012990448]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=476101489]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.81640625, 0.81640625, 0.81640625, 1)
+
+[node name="Interfaz" type="VBoxContainer" parent="." unique_id=1439892462]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.5
+offset_top = -52.625
+offset_right = 145.5
+offset_bottom = 52.625
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 17
+
+[node name="Jugar" type="Button" parent="Interfaz" unique_id=1638024635]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "JUGAR"
+script = ExtResource("1_a377p")
+escena = ExtResource("2_uxsmf")
+
+[node name="Opciones" type="Button" parent="Interfaz" unique_id=604740479]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "OPCIONES"
+script = ExtResource("3_jxos8")
+
+[node name="Salir" type="Button" parent="Interfaz" unique_id=1449590788]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "SALIR"
+script = ExtResource("4_krnv7")
