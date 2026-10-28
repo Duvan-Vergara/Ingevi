@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbaa2jly3j2av"]
 
-[ext_resource type="PackedScene" uid="uid://boo7q7i8vtrjw" path="res://escenas/Proyectiles/proyectil_base/proyectil_base.tscn" id="1_evu1l"]
+[ext_resource type="PackedScene" uid="uid://boo7q7i8vtrjw" path="res://escenas/proyectiles/proyectil_base/proyectil_base.tscn" id="1_evu1l"]
 [ext_resource type="Texture2D" uid="uid://ddo34y1ljpj2i" path="res://sprites/Proyectiles.png" id="2_spywy"]
 [ext_resource type="AudioStream" uid="uid://c0q1lr0ecbu7o" path="res://sonidos/bad_prueba.wav" id="3_spywy"]
 

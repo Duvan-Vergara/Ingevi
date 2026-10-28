@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bcufageerxx3i"]
 
-[ext_resource type="Script" uid="uid://cfhke448n0drq" path="res://scrips/personaje_principal.gd" id="1_trxxe"]
-[ext_resource type="SpriteFrames" uid="uid://b4o3l8b4etgsv" path="res://sprite_frames/sprite_frames_cuerpo_idle.tres" id="1_xsu42"]
-[ext_resource type="SpriteFrames" uid="uid://steosf8vcg4e" path="res://sprite_frames/sprite_frames_cabeza.tres" id="2_j0kpk"]
+[ext_resource type="Script" uid="uid://cfhke448n0drq" path="res://scrips/local/personaje_principal.gd" id="1_tqeiv"]
+[ext_resource type="SpriteFrames" uid="uid://b4o3l8b4etgsv" path="res://sprite_frames/sprite_frames_cuerpo_idle.tres" id="2_4ajsg"]
+[ext_resource type="SpriteFrames" uid="uid://steosf8vcg4e" path="res://sprite_frames/sprite_frames_cabeza.tres" id="3_4glni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1ko3"]
 size = Vector2(18, 16)
@@ -13,7 +13,7 @@ radius = 30.265491
 [node name="PersonajePrincipal" type="RigidBody2D" unique_id=397584173 node_paths=PackedStringArray("mov_cuerpo", "mov_cabeza", "clicks", "colisiones_propias", "aura")]
 collision_layer = 2
 collision_mask = 29
-script = ExtResource("1_trxxe")
+script = ExtResource("1_tqeiv")
 mov_cuerpo = NodePath("Cuerpo")
 mov_cabeza = NodePath("Cabeza")
 clicks = NodePath("AreaClicks")
@@ -25,12 +25,12 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_o1ko3")
 
 [node name="Cuerpo" type="AnimatedSprite2D" parent="." unique_id=170540592]
-sprite_frames = ExtResource("1_xsu42")
+sprite_frames = ExtResource("2_4ajsg")
 animation = &"idle_abajo"
 
 [node name="Cabeza" type="AnimatedSprite2D" parent="." unique_id=1568776825]
 position = Vector2(0, -13)
-sprite_frames = ExtResource("2_j0kpk")
+sprite_frames = ExtResource("3_4glni")
 animation = &"izquierda"
 
 [node name="AreaClicks" type="Area2D" parent="." unique_id=714276953]

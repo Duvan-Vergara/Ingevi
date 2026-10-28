@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Emptiness Drift"
-run/main_scene="uid://bbgu3grsfw0be"
+run/main_scene="uid://bj12744vb7eea"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DatosJugador="*uid://pw2es1tpx0tk"
 
 [display]
 

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bj12744vb7eea"]
+
+[ext_resource type="PackedScene" uid="uid://bbgu3grsfw0be" path="res://escenas/mapa/escenarios/escenario.tscn" id="1_ndhmg"]
+
+[node name="GestionMapas" type="Node2D" unique_id=1456618894]
+
+[node name="Escenario" parent="." unique_id=501899005 instance=ExtResource("1_ndhmg")]
