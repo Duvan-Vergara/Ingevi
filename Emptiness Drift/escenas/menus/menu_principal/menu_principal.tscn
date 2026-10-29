@@ -1,17 +1,160 @@
 [gd_scene format=3 uid="uid://cmqwv372vltnx"]
 
+[ext_resource type="Script" uid="uid://gie0my4uw2en" path="res://scrips/menus/menu_principal/menu_principal.gd" id="1_a57gu"]
 [ext_resource type="Script" uid="uid://damjaqald37pb" path="res://scrips/menus/menu_principal/botones/jugar.gd" id="1_a377p"]
 [ext_resource type="PackedScene" uid="uid://bj12744vb7eea" path="res://escenas/mapa/principal/gestion_mapas.tscn" id="2_uxsmf"]
 [ext_resource type="Script" uid="uid://ctxwxfsc5r4ii" path="res://escenas/menus/menu_principal/opciones.gd" id="3_jxos8"]
 [ext_resource type="Script" uid="uid://k1qdcjqkovrh" path="res://escenas/menus/menu_principal/salir.gd" id="4_krnv7"]
 
-[node name="MenuPrincipal" type="Control" unique_id=1012990448]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_krnv7"]
+load_path = "res://.godot/imported/black hole.png-df04329b268d44eadd2af83a8f6a6761.ctex"
+
+[sub_resource type="Animation" id="Animation_krnv7"]
+resource_name = "Palpito"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a57gu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_25d0m"]
+_data = {
+&"Palpito": SubResource("Animation_krnv7"),
+&"RESET": SubResource("Animation_a57gu")
+}
+
+[sub_resource type="Animation" id="Animation_25d0m"]
+resource_name = "Giro"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b4bo5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.775, 1.775)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i43nk"]
+_data = {
+&"Giro": SubResource("Animation_25d0m"),
+&"RESET": SubResource("Animation_b4bo5")
+}
+
+[sub_resource type="Animation" id="Animation_i43nk"]
+resource_name = "Crecer"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3cnap"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1ab2"]
+_data = {
+&"Crecer": SubResource("Animation_i43nk"),
+&"RESET": SubResource("Animation_3cnap")
+}
+
+[node name="MenuPrincipal" type="Control" unique_id=1012990448 node_paths=PackedStringArray("aura", "spin", "hole")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a57gu")
+aura = NodePath("BlackHole/Aura/AnimacionAura")
+spin = NodePath("BlackHole/Spin/AnimacionSpin")
+hole = NodePath("BlackHole/Hole/AnimacionHole")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=476101489]
 layout_mode = 1
@@ -21,6 +164,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.81640625, 0.81640625, 0.81640625, 1)
+
+[node name="BlackHole" type="Node2D" parent="." unique_id=1400416749]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(574, 324)
+scale = Vector2(1.72, 1.72)
+
+[node name="Aura" type="Sprite2D" parent="BlackHole" unique_id=132293519]
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_krnv7")
+region_enabled = true
+region_rect = Rect2(0, 1, 135, 135)
+
+[node name="AnimacionAura" type="AnimationPlayer" parent="BlackHole/Aura" unique_id=534150852]
+libraries/ = SubResource("AnimationLibrary_25d0m")
+
+[node name="Spin" type="Sprite2D" parent="BlackHole" unique_id=1233842555]
+texture_filter = 1
+scale = Vector2(1.775, 1.775)
+texture = SubResource("CompressedTexture2D_krnv7")
+region_enabled = true
+region_rect = Rect2(166, 128, 89, 127)
+
+[node name="AnimacionSpin" type="AnimationPlayer" parent="BlackHole/Spin" unique_id=1838430863]
+libraries/ = SubResource("AnimationLibrary_i43nk")
+
+[node name="Hole" type="Sprite2D" parent="BlackHole" unique_id=1825821326]
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_krnv7")
+region_enabled = true
+region_rect = Rect2(37, 175, 37, 37)
+
+[node name="AnimacionHole" type="AnimationPlayer" parent="BlackHole/Hole" unique_id=57725618]
+libraries/ = SubResource("AnimationLibrary_g1ab2")
 
 [node name="Interfaz" type="VBoxContainer" parent="." unique_id=1439892462]
 layout_mode = 1
